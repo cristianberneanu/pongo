@@ -5,7 +5,7 @@ defmodule Pongo.Match do
 
   alias Pongo.Match.Game
 
-  @update_interval 50
+  @update_interval 66
   @start_pause 800
   @end_pause 400
 
