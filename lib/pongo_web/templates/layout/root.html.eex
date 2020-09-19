@@ -11,7 +11,11 @@
   </head>
   <body style="background-color:black; color:white;">
     <header style="background-color:black; color:white;">
-    <a href="/">PongOnline</a>
+      Pong Online
+      <small>
+        <a href="/">Login Screen</a>
+        <a style="float: right;" href="https://github.com/cristianberneanu/pongo">GitHub</a>
+      </small>
     </header>
     <main role="main" class="container">
       <%= @inner_content %>

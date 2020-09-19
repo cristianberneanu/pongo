@@ -1,5 +1,5 @@
 <div class="card">
-  <h2>Game Login</h2>
+  <h2>Login</h2>
   <form action="login" method="post">
     <label for="name">Player Name:</label> <input type="text" name="name" maxlength="32"/>
     <label for="tag">Game Tag: (empty for any)</label> <input type="text" name="tag" maxlength="64"/>
