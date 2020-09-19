@@ -34,7 +34,7 @@ defmodule Pongo.Match.Game do
 
   def start(state) do
     direction = Vec.new(2 * :rand.uniform() - 1, Enum.random([1, -1])) |> Vec.normalize()
-    %__MODULE__{state | direction: direction, sound: "start"}
+    %__MODULE__{state | direction: direction, sound: :start}
   end
 
   def invert(state) do
@@ -62,7 +62,7 @@ defmodule Pongo.Match.Game do
         state =
           if object_index not in [nil, state.last_collision] do
             direction = objects |> Enum.at(object_index) |> bounce(state.direction)
-            %{state | direction: direction, last_collision: object_index, sound: "bounce"}
+            %{state | direction: direction, last_collision: object_index, sound: :bounce}
           else
             state
           end
