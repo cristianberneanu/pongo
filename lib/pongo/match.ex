@@ -5,14 +5,14 @@ defmodule Pongo.Match do
 
   alias Pongo.Match.Game
 
-  @update_rate 50
+  @update_interval 50
   @start_pause 800
   @end_pause 400
 
   def parameters() do
     Map.merge(
       %{
-        update_rate: @update_rate
+        update_interval: @update_interval
       },
       Game.parameters()
     )
@@ -41,7 +41,7 @@ defmodule Pongo.Match do
     send_msg(pid1, {:connect, self(), name2, state.game})
     send_msg(pid2, {:connect, self(), name1, state.game})
 
-    Process.send_after(self(), {:start, :erlang.timestamp(), @start_pause}, @update_rate)
+    Process.send_after(self(), {:start, :erlang.timestamp(), @start_pause}, @update_interval)
 
     {:ok, state}
   end
@@ -49,7 +49,7 @@ defmodule Pongo.Match do
   @impl true
   def handle_info(:new, state) do
     state = %{state | game: Game.new(state.player1_score + state.player2_score)}
-    Process.send_after(self(), {:start, :erlang.timestamp(), @start_pause}, @update_rate)
+    Process.send_after(self(), {:start, :erlang.timestamp(), @start_pause}, @update_interval)
     {:noreply, send_update(state)}
   end
 
@@ -66,10 +66,10 @@ defmodule Pongo.Match do
 
     state =
       if countdown < 0 do
-        Process.send_after(self(), {:play, now}, @update_rate)
+        Process.send_after(self(), {:play, now}, @update_interval)
         %{state | game: Game.start(state.game)}
       else
-        Process.send_after(self(), {:start, now, countdown}, @update_rate)
+        Process.send_after(self(), {:start, now, countdown}, @update_interval)
         %{state | game: game}
       end
 
@@ -86,7 +86,7 @@ defmodule Pongo.Match do
     state =
       case Game.advance(state.game, time_step, player1_speed, player2_speed) do
         {:ok, game} ->
-          Process.send_after(self(), {:play, now}, @update_rate)
+          Process.send_after(self(), {:play, now}, @update_interval)
           %{state | game: game}
 
         game_result ->

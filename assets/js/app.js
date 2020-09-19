@@ -93,7 +93,7 @@ function paint_paddles(lerp_amount) {
 }
 
 function paint(timestamp) {
-  const lerp_amount = Math.min((timestamp - g_data.timestamp) / g_constants.update_rate, 1);
+  const lerp_amount = Math.min((timestamp - g_data.timestamp) / g_constants.update_interval, 1);
 
   g_context.clearRect(0, 0, g_constants.field_width, g_constants.field_height);
 
