@@ -1,7 +1,7 @@
 <div class="board">
   <div class="score_column">
-    <div class="score"><%= @name %>: <%= @score %> </div>
     <div class="score"><%= @opponent_name %>: <%= @opponent_score %></div>
+    <div class="score"><%= @name %>: <%= @score %> </div>
   </div>
   <div id="board" phx-window-keydown="key_down" phx-window-keyup="key_up" phx-hook="board"
       data-client="<%= Jason.encode!(@game) %>">
