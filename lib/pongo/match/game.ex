@@ -77,10 +77,10 @@ defmodule Pongo.Match.Game do
 
     cond do
       state.ball.y < -@parameters.ball_radius ->
-        :player2_wins
+        :player1_wins
 
       state.ball.y > @parameters.field_height + @parameters.ball_radius ->
-        :player1_wins
+        :player2_wins
 
       true ->
         {:ok, state}
